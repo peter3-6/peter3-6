@@ -131,3 +131,78 @@
  *
  *
  */
+
+ /*
+
+<style>
+</style>
+<template>
+  <div>
+                    <Row>
+                        <Table :columns="columns1" :data="data3" :border='true'  :height='tableheight'></Table>
+                    </Row>
+  </div>
+</template>
+
+<script>
+import util from "../../libs/util";
+export default {
+  name: "mobilelist",
+  data() {
+    return {
+			tableheight: document.body.clientHeight - 325,
+			data3:[],
+      project_people: {
+        p: 1,
+        nump: 12,
+        id: 123
+      },
+			columns1:[
+			{
+				key: "article_id",
+				title: "序号",
+				width: 300
+			},
+			{
+				key: "username",
+				title: "姓名",
+				width:500
+			},
+			{
+				key: "tel",
+				title: "电话",
+				width: 500
+			},
+			]
+    };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+    //   this.project_people.id = this.$route.query.id;
+      util.ajax
+        .post(
+          `index.php/admin/project/project_people`,
+          this.project_people
+        )
+        .then(res => {
+			let lbdata = [];
+			res.data.data.data.forEach((vaue, index, arry) => {
+				lbdata[index] = {
+					article_id: vaue.id,
+					username: vaue.username,
+					tel: vaue.tel,
+				};
+			});
+			this.data3 = lbdata;
+
+        });
+    }
+  }
+};
+</script>
+
+
+ */
